@@ -12,7 +12,7 @@ Kotlin and Micronaut is used to implement a server the provides 2 endpoints:
 Java version 11
 ```
 
-### Running the server, run gradle from the prject root:
+### Running the server, run gradle from the project root:
 
 ```
 gradlew clean build run
