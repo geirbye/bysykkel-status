@@ -12,18 +12,21 @@ Kotlin and Micronaut is used to implement a server the provides 2 endpoints:
 Java version 11
 ```
 
-### Running the server, run gradle from the project root:
+### To start the server, run gradle from the project root:
 
 ```
 gradlew clean build run
 ```
 
-The server exposes the endpoints on HTTP:
+The server exposes two endpoints on HTTP:
 
 http://localhost:8080/citybike/unformatted (returns the list in json format, best viewed in e.g. Postman)
 
 http://localhost:8080/citybike/formatted (returns the list in simple html format, best viewed in a web browser)
 
 Some web browsers will try to redirect the http call to a https call. This implementation does not support HTTPS.
+To force Chrome to avoid redirecting to HTTPS:
+
+- go to chrome://net-internals and select “HSTS” from the drop down. Enter "localhost" under “Delete domain” and press the Delete button.
 
 
