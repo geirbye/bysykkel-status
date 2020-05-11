@@ -10,13 +10,10 @@ import no.geir.citybike.domain.CityBikeStationList
 import no.geir.citybike.service.CityBikeService
 import javax.inject.Inject
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-
 @Controller("/citybike")
 open class CityBikeController(@Inject val cityBikeService: CityBikeService) {
 
-    @Get("/unformatted", produces = [MediaType.APPLICATION_JSON])
+    @Get("/json", produces = [MediaType.APPLICATION_JSON])
     @Produces(MediaType.APPLICATION_JSON)
     open fun getCityBikeStationUnformatted(): HttpResponse<String> {
 
@@ -25,7 +22,7 @@ open class CityBikeController(@Inject val cityBikeService: CityBikeService) {
 
     }
 
-    @Get("/formatted")
+    @Get("/html")
     open fun getCityBikeStationFormatted(): ModelAndView<CityBikeStationList> {
 
         val cityBikeStationList = cityBikeService.getBikeStationList()

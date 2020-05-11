@@ -12,31 +12,24 @@ class CityBikeService (@Inject val osloBysykkelClient: OsloBysykkelClient,
 
     fun getBikeStationList(): List<CityBikeStation> {
 
-        val stationInformationJson = osloBysykkelClient.getDocument("station_information.json")
-        val stationInformationDocTree: JsonNode = objectMapper.readTree(stationInformationJson)
-        val stationsInformationNode: JsonNode = stationInformationDocTree.path("data").path("stations")
-
+        val stationsInformationNode: JsonNode = getStatusJsonNode("station_information.json")
         val cityBikeStationNameMap: HashMap<Int, String> = HashMap<Int, String>()
-        for (node in stationsInformationNode) {
+        stationsInformationNode.forEach { node ->
             cityBikeStationNameMap.put(
                     node.path("station_id").asInt(),
                     node.path("name").asText()
-                    )
+            )
         }
 
-        val stationStatusJson = osloBysykkelClient.getDocument("station_status.json")
-        val stationStatusDocTree: JsonNode = objectMapper.readTree(stationStatusJson)
-        val stationsStatusNode: JsonNode = stationStatusDocTree.path("data").path("stations")
-
+        val stationsStatusNode: JsonNode = getStatusJsonNode("station_status.json")
         val bikeStationList : MutableList<CityBikeStation> = ArrayList()
-
-        for (node in stationsStatusNode) {
+        stationsStatusNode.forEach { node ->
             val stationId : Int  = node.path("station_id").asInt()
             val stationItem = CityBikeStation(
-                                stationId,
-                                cityBikeStationNameMap.get(stationId)!!,
-                                node.path("num_docks_available").intValue(),
-                                node.path("num_bikes_available").intValue()
+                    stationId,
+                    cityBikeStationNameMap.get(stationId)!!,
+                    node.path("num_docks_available").intValue(),
+                    node.path("num_bikes_available").intValue()
             )
             bikeStationList.add(stationItem)
         }
@@ -45,6 +38,12 @@ class CityBikeService (@Inject val osloBysykkelClient: OsloBysykkelClient,
 
         return bikeStationList
 
+    }
+
+    private fun getStatusJsonNode(doc: String): JsonNode {
+        val stationStatusJson = osloBysykkelClient.getDocument(doc)
+        val stationStatusDocTree: JsonNode = objectMapper.readTree(stationStatusJson)
+        return stationStatusDocTree.path("data").path("stations")
     }
 
 }

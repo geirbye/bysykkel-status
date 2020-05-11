@@ -20,6 +20,7 @@
             <th>Ledige låser</th>
         </tr>
         #foreach( $cityBikeStation in $cityBikeStationList )
+            <tr>
                 <td>$cityBikeStation.stationName</td>
                 <td>$cityBikeStation.availableBikes</td>
                 <td>$cityBikeStation.availableDocks</td>
