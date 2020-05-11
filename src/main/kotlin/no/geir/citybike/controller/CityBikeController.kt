@@ -15,10 +15,11 @@ open class CityBikeController(@Inject val cityBikeService: CityBikeService) {
 
     @Get("/json", produces = [MediaType.APPLICATION_JSON])
     @Produces(MediaType.APPLICATION_JSON)
-    open fun getCityBikeStationUnformatted(): HttpResponse<String> {
+    open fun getCityBikeStationUnformatted(): HttpResponse<CityBikeStationList> {
 
         val cityBikeStationList = cityBikeService.getBikeStationList()
-        return HttpResponse.ok(cityBikeStationList.toString())
+        val cityBikeStationListWrapper = CityBikeStationList(cityBikeStationList)
+        return HttpResponse.ok(cityBikeStationListWrapper)
 
     }
 
