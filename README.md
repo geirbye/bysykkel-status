@@ -26,7 +26,7 @@ Java version 11+
 
 The server exposes two endpoints on HTTP:
 
-http://localhost:8080/citybike/json (returns the list in json format, best viewed in e.g. Postman)
+http://localhost:8080/citybike/bike-stations (returns the list in json format, best viewed in e.g. Postman)
 
 http://localhost:8080/citybike/html (returns the list in simple html format, best viewed in a web browser)
 
