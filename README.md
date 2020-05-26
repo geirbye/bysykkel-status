@@ -2,7 +2,7 @@
 
 This project explores the [Open API of Oslo Bysykkel](https://oslobysykkel.no/apne-data/sanntid).
 
-Kotlin and Micronaut is used to implement a server the provides 2 endpoints:
+Kotlin and Micronaut is used to implement a server that provides 2 endpoints:
 
 - one REST/json-endpoint that return a list of Stations, with StationId, StationName, AvaiableBikes and AvailableDocks
 - and one simplistic html endpoint, utilizing a velocity template to display the station list in alphabetical order
